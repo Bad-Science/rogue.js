@@ -1,6 +1,15 @@
 <html>
 	
 <head>
+	<meta charset="UTF-8"> 
+
+	<style id="css">
+		@font-face {
+    		font-family: 'PC_CGA';
+    		src: url('fonts/PC_CGA.fon');
+		}
+	</style>
+
 	<script typ="text'javascript">
 		function _(id)
 		{
@@ -22,8 +31,10 @@
 		window.onload = function()
 		{
 			var canvas = _('screen');
-			Rogue.initScreen(canvas, 20, 20, 16);
-			Rogue.screen.draw();
+			var screen = new Rogue.Screen(canvas, 20, 20, 16, "main");
+			screen.initBuffers();
+			Rogue.ScreenUtils.drawBox(0, 0, 10, 10, screen, Rogue.ScreenUtils.LINE_BOX, "#FF0000");
+			screen.draw();
 		//	alert(Rogue.game.x);
 		}
 	</script>

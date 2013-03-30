@@ -1,70 +1,98 @@
 var Rogue =
 {
 
+	screens: {},
+
 	/*<screen>*/
-	initScreen: function(c, w, h, f)
-	{
-		// this.screen = new Screen(canvas);
-		//Screen.canvas 
-		// alert(canvas.id);
-		Rogue.screen.canvas = c;
-		Rogue.screen.width = w;
-		Rogue.screen.height = h;
-		Rogue.screen.fontSize = f;
-		Rogue.screen.createBuffers();
-	},
 
 	make2DArray: function(w, h)
 	{
-		var arr = {};
-		for (var x = 0; x < w; x++)
-			arr[x] = {};
+		var arr = [];
+		while (arr.push([h]) < w);
 		return arr;
 	},
 
-	screen:
+	Screen: function(c, w, h, f, i)
 	{
-		canvas: {},
-		charBuffer: {},
-		colorBuffer: {},
-		fontSize: 16,
+		var self = this;
+		var width = w;
+		var height = h;
+		var canvas = c;
+		var fontSize = f;
+		var id = i;
+		// this.font = "regular PC_CGA 20px"
+		this.charBuffer = Rogue.make2DArray(width, height);
+		this.colorBuffer = Rogue.make2DArray(width, height);
 		
-		createBuffers: function(wp, hp)
+		this.initBuffers = function()
 		{
-			var w = wp || Rogue.screen.width;
-			var h = hp || Rogue.screen.height;
-			Rogue.screen.charBuffer = Rogue.make2DArray(w, h);
-			Rogue.screen.colorBuffer = Rogue.make2DArray(w, h);
-			for (var x = 0; x < w; x++)
+			for (var x = 0; x < width; x++)
 			{
-				for (var y = 0; y < h; y++)
+				for (var y = 0; y < height; y++)
 				{
-					Rogue.screen.charBuffer[x][y] = "Q";
-					Rogue.screen.colorBuffer[x][y] = "#FF0000";
+					self.charBuffer[x][y] = "Q";
+					self.colorBuffer[x][y] = "#000000";
 				}
 			}
-		},
+		};
 		
-		gfx: function()
+		function getGfx()
 		{
-			return Rogue.screen.canvas.getContext('2d');
-		},
+			return canvas.getContext('2d');
+		};
 		
-		draw: function()
+		this.draw = function()
 		{
-			if (Rogue.screen.canvas)
+			if (canvas)
 			{
-				gfx = Rogue.screen.gfx();
-				for (var x = 0; x < Rogue.screen.width; x++)
-					for (var y = 0; y < Rogue.screen.height; y++)
+				var gfx = getGfx();
+				for (var x = 0; x < width; x++)
+					for (var y = 0; y < height; y++)
 					{
-						gfx.strokeStyle = "#FF0000";
-						gfx.fillText(Rogue.screen.charBuffer[x][y], x * Rogue.screen.fontSize, y * Rogue.screen.fontSize);
-						// gfx.fillRect(0,0,Rogue.screen.width*Math.random(), Rogue.screen.height*Math.random());
+						gfx.fillStyle = self.colorBuffer[x][y];
+						gfx.fillText(self.charBuffer[x][y], x/1.5 * fontSize, (y + .8) / 1.1 * fontSize);
 					}
 			}
 			else alert("Canvas not found!");
-		},
+		};
+
+		this.id = function()
+		{
+			return id;
+		};
+
+		if (Rogue)
+			Rogue.screens[id] = this;
+	},
+
+	ScreenUtils:
+	{
+
+		DOUBLE_LINE_BOX: ['═', '║', '╔', '╗', '╝', '╚'],
+		LINE_BOX: ['━', '┃', '┏', '┓', '┛', '┗'],
+		DEFAULT_BOX: ['━', '┃', '╭', '╮', '╯', '╰'],
+
+		drawBox: function(x1, y1, x2, y2, s, ch, co)
+		{
+			for (var x = x1 + 1; x < x2; x++)
+			{
+				s.charBuffer[x][y1] = ch[0];
+				s.charBuffer[x][y2] = ch[0];
+				s.colorBuffer[x][y1] = co;
+				s.colorBuffer[x][y2] = co;
+			}
+			for (var y = y1 + 1; y < y2; y++)
+			{
+				s.charBuffer[x1][y] = ch[1];
+				s.charBuffer[x2][y] = ch[1];
+				s.colorBuffer[x1][y] = co;
+				s.colorBuffer[x2][y] = co;
+			}
+			s.charBuffer[x1][y1] = ch[2];
+			s.charBuffer[x2][y1] = ch[3];
+			s.charBuffer[x2][y2] = ch[4];
+			s.charBuffer[x1][y2] = ch[5];
+		}
 	},
 	/*</screen>*/
 
