@@ -1,6 +1,12 @@
 Rogue.game.EntityComponents =
 {
+	Vis: function(ch, co)
+	{
+		this.ch = ch;
+		this.co = co;
+	}
 
+	
 };
 
 Rogue.game.Entities = 

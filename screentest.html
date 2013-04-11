@@ -9,6 +9,8 @@
     		src: url('fonts/ProFont.ttf');
     		font-family: '04B-08';
     		src: url('fonts/04B-08.ttf');
+   			font-family: 'pf2';
+    		src: url('fonts/pf2.pcf');
 		}
 	</style>
 	<style id="css">
@@ -48,7 +50,7 @@
 			var width = 47;
 			var height = 28;
 			var canvas = _('screen0');
-			var screen = new Rogue.Screen(canvas, width, height, 20, "main");
+			var screen = new Rogue.Screen(canvas, width, height, 10, "main");
 			screen.initBuffers();
 			Rogue.ScreenUtils.drawRect(0, 0, width-1, height-1, screen, Rogue.ScreenUtils.BLOCK_BOX, "#660000");
 			var box1 = Rogue.ScreenUtils.drawRect(0, 0, 25, 20, screen, Rogue.ScreenUtils.BLOCK_BOX, "#660000");

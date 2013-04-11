@@ -44,9 +44,11 @@ var Rogue =
 		var _height = h;
 		var canvas = c;
 		var fontSize = f;
+		var fontWidth = fontSize;
 		this.backgroundColor = "#101010";
 		var id = i;
-		this.font = "20px ProFont";
+		this.font = (fontSize + "px ProFont");
+		this.font = "pf2";
 		this.charBuffer = Rogue.make2DArray(_width, _height);
 		this.colorBuffer = Rogue.make2DArray(_width, _height);
 		var defaultCharBuffer = Rogue.make2DArray(_width, _height);
@@ -64,6 +66,13 @@ var Rogue =
 					defaultColorBuffer[x][y] = "#336600";
 				}
 			}
+			var ctx = getGfx();
+			console.log(fontSize);
+			fontWidth = ctx.measureText("█").width ;
+			console.log(fontWidth);
+			canvas.width = (fontWidth + 1) * _width;
+			canvas.height = (fontSize + 1) * _height;
+
 		};
 
 		this.width = function()
@@ -91,7 +100,7 @@ var Rogue =
 					for (var y = 0; y < _height; y++)
 					{
 						gfx.fillStyle = self.colorBuffer[x][y];
-						gfx.fillText(self.charBuffer[x][y], x * (fontSize-3), (y + 1) * (fontSize + 1));
+						gfx.fillText(self.charBuffer[x][y], x * (fontWidth + 1), (y + 1) * (fontSize + 1));
 					}
 			}
 			else alert("Canvas not found!");
