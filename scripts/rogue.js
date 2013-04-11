@@ -1,3 +1,28 @@
+Object.prototype.subclass = function(parent)
+{
+	// this.prototype.superclass = parent;
+	if (parent.constructor == Function)
+	{
+		this.prototype = new parent();
+		this.prototype.constructor = this;
+		this.prototype.parent = parent.prototype;
+	}
+	else
+	{
+		this.prototype = parent;
+		this.prototype.constructor = this;
+		this.prototype.parent = parent;
+	}
+}
+
+function subclassAll(parent, children)
+{
+	for (var child in children)
+	{
+		children[child].subclass(parent);
+	}
+}
+
 var Rogue =
 {
 
@@ -15,25 +40,40 @@ var Rogue =
 	Screen: function(c, w, h, f, i)
 	{
 		var self = this;
-		var width = w;
-		var height = h;
+		var _width = w;
+		var _height = h;
 		var canvas = c;
 		var fontSize = f;
+		this.backgroundColor = "#101010";
 		var id = i;
-		// this.font = "regular PC_CGA 20px"
-		this.charBuffer = Rogue.make2DArray(width, height);
-		this.colorBuffer = Rogue.make2DArray(width, height);
+		this.font = "20px ProFont";
+		this.charBuffer = Rogue.make2DArray(_width, _height);
+		this.colorBuffer = Rogue.make2DArray(_width, _height);
+		var defaultCharBuffer = Rogue.make2DArray(_width, _height);
+		var defaultColorBuffer = Rogue.make2DArray(_width, _height);
 		
 		this.initBuffers = function()
 		{
-			for (var x = 0; x < width; x++)
+			for (var x = 0; x < _width; x++)
 			{
-				for (var y = 0; y < height; y++)
+				for (var y = 0; y < _height; y++)
 				{
-					self.charBuffer[x][y] = "Q";
-					self.colorBuffer[x][y] = "#000000";
+					self.charBuffer[x][y] = "";
+					self.colorBuffer[x][y] = "#336600";
+					defaultCharBuffer[x][y] = "";
+					defaultColorBuffer[x][y] = "#336600";
 				}
 			}
+		};
+
+		this.width = function()
+		{
+			return _width;
+		};
+
+		this.height = function()
+		{
+			return _height;
 		};
 		
 		function getGfx()
@@ -46,14 +86,38 @@ var Rogue =
 			if (canvas)
 			{
 				var gfx = getGfx();
-				for (var x = 0; x < width; x++)
-					for (var y = 0; y < height; y++)
+				gfx.font = self.font;
+				for (var x = 0; x < _width; x++)
+					for (var y = 0; y < _height; y++)
 					{
 						gfx.fillStyle = self.colorBuffer[x][y];
-						gfx.fillText(self.charBuffer[x][y], x/1.5 * fontSize, (y + .8) / 1.1 * fontSize);
+						gfx.fillText(self.charBuffer[x][y], x * (fontSize-3), (y + 1) * (fontSize + 1));
 					}
 			}
 			else alert("Canvas not found!");
+		};
+
+		this.clear = function()
+		{
+			for (var x = 0; x < _width; x++)
+				for (var y = 0; y < _height; y++)
+				{
+					self.charBuffer[x][y] = defaultCharBuffer[x][y];
+					self.colorBuffer[x][y] = defaultColorBuffer[x][y];
+				}
+			var gfx = canvas.getContext('2d');
+			gfx.fillStyle = this.backgroundColor;
+			gfx.fillRect(0, 0, canvas.width, canvas.height);
+		};
+
+		this.setDefault = function()
+		{
+			for (var x = 0; x < _width; x++)
+				for (var y = 0; y < _height; y++)
+				{
+					defaultCharBuffer[x][y] = self.charBuffer[x][y];
+					defaultColorBuffer[x][y] = self.colorBuffer[x][y];
+				}
 		};
 
 		this.id = function()
@@ -65,35 +129,59 @@ var Rogue =
 			Rogue.screens[id] = this;
 	},
 
-	ScreenUtils:
+	Animator: function(screen)
 	{
-
-		DOUBLE_LINE_BOX: ['═', '║', '╔', '╗', '╝', '╚'],
-		LINE_BOX: ['━', '┃', '┏', '┓', '┛', '┗'],
-		DEFAULT_BOX: ['━', '┃', '╭', '╮', '╯', '╰'],
-
-		drawBox: function(x1, y1, x2, y2, s, ch, co)
+		var self = this;
+		var killed = false;
+		this.targetFPS = 30;
+		var fa = [];
+		var lastTime = 0;
+		var animFunc = function()
 		{
-			for (var x = x1 + 1; x < x2; x++)
+			screen.clear();
+			screen.draw();
+		};
+
+		this.start = function(func)
+		{
+			if (func)
+				animFunc = func;
+			killed = false;
+			animate();
+		};
+
+		this.stop = function()
+		{
+			killed = true;
+		};
+
+		this.FPS = function(frames)
+		{
+			var t = 0;
+			frames = (frames <= fa.length) ? frames : fa.length;
+			for (var f = 0; f < frames; f++)
 			{
-				s.charBuffer[x][y1] = ch[0];
-				s.charBuffer[x][y2] = ch[0];
-				s.colorBuffer[x][y1] = co;
-				s.colorBuffer[x][y2] = co;
+				t += fa[fa.length - f - 1];
+				// console.log(fa[fa.length - f - 1]);
 			}
-			for (var y = y1 + 1; y < y2; y++)
+			return ((frames / t) * 1000);
+		};
+
+		function animate()
+		{
+			if (!killed)
 			{
-				s.charBuffer[x1][y] = ch[1];
-				s.charBuffer[x2][y] = ch[1];
-				s.colorBuffer[x1][y] = co;
-				s.colorBuffer[x2][y] = co;
+				var newTime = new Date().getTime();
+				if (!lastTime)
+					lastTime = newTime;
+				animFunc();
+				fa.push((newTime - lastTime));
+				if (fa.length > 1000)
+					fa.shift();
+				lastTime = newTime;
+				setTimeout(animate, ((1000 / self.targetFPS) - (new Date().getTime() - lastTime)));
 			}
-			s.charBuffer[x1][y1] = ch[2];
-			s.charBuffer[x2][y1] = ch[3];
-			s.charBuffer[x2][y2] = ch[4];
-			s.charBuffer[x1][y2] = ch[5];
 		}
 	},
 	/*</screen>*/
-
-}
+};

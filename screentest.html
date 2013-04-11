@@ -5,8 +5,20 @@
 
 	<style id="css">
 		@font-face {
-    		font-family: 'PC_CGA';
-    		src: url('fonts/PC_CGA.fon');
+    		font-family: 'ProFont';
+    		src: url('fonts/ProFont.ttf');
+    		font-family: '04B-08';
+    		src: url('fonts/04B-08.ttf');
+		}
+	</style>
+	<style id="css">
+		body
+		{
+			background-color: #101020 !important;
+		}
+		.screen
+		{
+
 		}
 	</style>
 
@@ -18,7 +30,10 @@
 	</script>
 	
 	<script type="text/javascript" src="scripts/rogue.js"></script>
-	
+	<script type="text/javascript" src="scripts/screenutils.js"></script>
+	<script type="text/javascript" src="scripts/game.js"></script>
+	<script type="text/javascript" src="scripts/entities.js"></script>
+
 	<script type="text/javascript">
 		function createCanvas(w, h)
 		{
@@ -30,19 +45,32 @@
 		}
 		window.onload = function()
 		{
-			var canvas = _('screen');
-			var screen = new Rogue.Screen(canvas, 20, 20, 16, "main");
+			var width = 47;
+			var height = 28;
+			var canvas = _('screen0');
+			var screen = new Rogue.Screen(canvas, width, height, 20, "main");
 			screen.initBuffers();
-			Rogue.ScreenUtils.drawBox(0, 0, 10, 10, screen, Rogue.ScreenUtils.LINE_BOX, "#FF0000");
-			screen.draw();
+			Rogue.ScreenUtils.drawRect(0, 0, width-1, height-1, screen, Rogue.ScreenUtils.BLOCK_BOX, "#660000");
+			var box1 = Rogue.ScreenUtils.drawRect(0, 0, 25, 20, screen, Rogue.ScreenUtils.BLOCK_BOX, "#660000");
+			Rogue.ScreenUtils.fillRect(box1.x1 + 1, box1.y1 + 1, box1.x2 - 1, box1.y2 - 1, screen, "▚", "#6b8e23");
+			screen.setDefault();			
+			var animator = new Rogue.Animator(screen);
+			animator.targetFPS = 5;
+			animator.start(function()
+				{
+					screen.clear();
+					var fpsString = Math.round(animator.FPS(10).toFixed(1)) + " FPS";
+					// console.log(fpsString);
+					Rogue.ScreenUtils.drawString(fpsString, "#FF0000", width - 10, 1, screen);
+					screen.draw();
+				});
 		//	alert(Rogue.game.x);
 		}
 	</script>
 </head>
 
-
 <body>
-	<canvas id='screen' width=400 height=400></canvas>
+	<canvas id='screen0' class='screen' width=800 height=600></canvas>
 </body>
 	
 </html>
