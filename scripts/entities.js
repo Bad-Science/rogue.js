@@ -1,13 +1,4 @@
-Rogue.game.EntityComponents =
-{
-	Vis: function(ch, co)
-	{
-		this.ch = ch;
-		this.co = co;
-	}
 
-	
-};
 
 Rogue.game.Entities = 
 {
@@ -21,4 +12,6 @@ Rogue.game.Entities =
 	},
 };
 
-subclassAll(Rogue.game.Entity, Rogue.game.Entities);
+Rogue.game.Entities.NPC.subclass();
+
+// subclassAll(Rogue.game.Entity, Rogue.game.Entities);

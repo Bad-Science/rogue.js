@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"getC",
+				"getContext"
+			],
+			[
 				"proto",
 				"prototype"
 			],
@@ -44,18 +48,10 @@
 	"buffers":
 	[
 		{
-			"file": "scripts/rogue.js",
+			"file": "screentest.html",
 			"settings":
 			{
-				"buffer_size": 2805,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/screenutils.js",
-			"settings":
-			{
-				"buffer_size": 999,
+				"buffer_size": 2219,
 				"line_ending": "Unix"
 			}
 		},
@@ -66,44 +62,24 @@
 				"buffer_size": 779,
 				"line_ending": "Unix"
 			}
-		},
-		{
-			"file": "scripts/camera.js",
-			"settings":
-			{
-				"buffer_size": 846,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "screentest.html",
-			"settings":
-			{
-				"buffer_size": 1457,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/entities.js",
-			"settings":
-			{
-				"buffer_size": 172,
-				"line_ending": "Unix"
-			}
 		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 172.0,
+		"height": 392.0,
 		"selected_items":
 		[
+			[
+				"",
+				"Convert Case: Title Case"
+			],
 			[
 				"Snippet: ",
 				"Snippet: Short Tag"
 			]
 		],
-		"width": 392.0
+		"width": 467.0
 	},
 	"console":
 	{
@@ -120,12 +96,14 @@
 	},
 	"file_history":
 	[
+		"/home/richie/Dropbox/Dev/rogue.js/scripts/entities.js",
+		"/home/richie/Dropbox/Dev/rogue.js/scripts/camera.js",
+		"/home/richie/Dropbox/Dev/rogue.js/scripts/screenutils.js",
 		"/home/richie/.bashrc",
 		"/home/richie/Dropbox/Dev/rogue.js/scripts/screen.js",
 		"/home/richie/Dropbox/Dev/rogue.js/screentest.html",
 		"/home/richie/Dropbox/Dev/rogue.js/scripts/game.js",
 		"/home/richie/Dropbox/Dev/rogue.js/scripts/rogue.js",
-		"/home/richie/Dropbox/Dev/rogue.js/scripts/screenutils.js",
 		"/home/richie/.config/sublime-text-2/Packages/User/Double For.sublime-snippet",
 		"/home/richie/.config/sublime-text-2/Packages/User/Preferences.sublime-settings",
 		"/home/richie/.config/sublime-text-2/Packages/User/Distraction Free.sublime-settings",
@@ -148,6 +126,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			", ",
 			"char",
 			"\";\n",
 			"font"
@@ -173,54 +152,27 @@
 			[
 				{
 					"buffer": 0,
-					"file": "scripts/rogue.js",
+					"file": "screentest.html",
 					"settings":
 					{
-						"buffer_size": 2805,
+						"buffer_size": 2219,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2703,
-								2703
+								382,
+								382
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1710.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "scripts/screenutils.js",
-					"settings":
-					{
-						"buffer_size": 999,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								242,
-								242
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 36.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -232,7 +184,7 @@
 			"sheets":
 			[
 				{
-					"buffer": 2,
+					"buffer": 1,
 					"file": "scripts/game.js",
 					"settings":
 					{
@@ -243,8 +195,8 @@
 						"selection":
 						[
 							[
-								175,
-								175
+								751,
+								749
 							]
 						],
 						"settings":
@@ -253,93 +205,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 3,
-					"file": "scripts/camera.js",
-					"settings":
-					{
-						"buffer_size": 846,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								269,
-								269
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "screentest.html",
-					"settings":
-					{
-						"buffer_size": 1457,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 135.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "scripts/entities.js",
-					"settings":
-					{
-						"buffer_size": 172,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 225.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -370,19 +236,12 @@
 				0,
 				2,
 				1
-			],
-			[
-				2,
-				0,
-				3,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.3662400906,
-			0.666666666667,
+			0.5,
 			1.0
 		],
 		"rows":
@@ -417,6 +276,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 114.0,
 	"status_bar_visible": true
 }

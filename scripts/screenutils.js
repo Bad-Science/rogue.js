@@ -1,6 +1,5 @@
 Rogue.ScreenUtils =
 {
-	// DOUBLE_LINE_BOX: ['═', '║', '╔', '╗', '╝', '╚'],
 
 	// LINE_BOX: ['━', '┃', '┏', '┓', '┛', '┗'],
 
@@ -10,10 +9,14 @@ Rogue.ScreenUtils =
 	// ፡ ። ፣ ፤ ፥ ፦ ፧ ፨ 
 	// ᚁ ᚂ ᚃ ᚄ ᚅ ᚆ ᚇ ᚈ ᚉ ᚊ ᚘ ᚙ
 
+	DOUBLE_LINE_BOX: ['═', '═', '║', '║', '╔', '╗', '╝', '╚',
+						'╬', '╣', '╠', '╩', '╦'],
+
 	BLOCK_BOX: ['▀', '▄', '▌', '▐', '▛', '▜', '▟', '▙'],
 
 	SOLID_BLOCK_BOX: ['█', '█', '█', '█', '█', '█', '█', '█'],
-	
+
+
 	drawRect: function(x1, y1, x2, y2, s, ch, co)
 	{
 		for (var x = x1 + 1; x < x2; x++)

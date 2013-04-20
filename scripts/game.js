@@ -30,9 +30,22 @@ Rogue.game =
 	Entity: function()
 	{
 		var self = this;
-		this.logic = function(){};
 		var _x, _y;
 		var _vis = {ch: "", co: ""};
+
+		this.comps = {};
+		this.customLogic = null;
+		this.logic = function()
+		{
+			for (var comp in self.comps)
+			{
+				if (comp.logic)
+					comp.logic();
+				if (self.customLogic)
+					self.customLogic();
+			}
+		};
+
 		this.x = function(n)
 		{
 			if (n != undefined)
@@ -49,14 +62,30 @@ Rogue.game =
 			}
 			return _y;
 		};
-		this.vis = function(nvis)
-		{
-			if (nvis)
-			{
-				_vis.ch = nvis.ch;
-				_vis.co = nvis.co;
-			}
-			return {ch: _vis.ch, co: _vis.co};
-		};
 	},
+};
+
+Rogue.game.Entity.prototype.subclass = function(parent)
+{
+	parent = (parent || Rogue.game.Entity)
+	this.prototype = new parent();
+	var self = this;
+	var parentConst = this.prototype.constructor;
+	this.prototype.constructor = function()
+	{
+		parentConst();
+		self();
+	};
+	this.prototype.parent = parent.prototype;
+}
+
+Rogue.game.EntityComponents =
+{
+	Vis: function(ch, co)
+	{
+		this.ch = ch;
+		this.co = co;
+	}
+
+	
 };

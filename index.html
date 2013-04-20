@@ -1,4 +1,4 @@
-<html>
+  <html>
 	
 <head>
 	<meta charset="UTF-8"> 
@@ -51,11 +51,19 @@
 			var height = 28;
 			var canvas = _('screen0');
 			var screen = new Rogue.Screen(canvas, width, height, 10, "main");
+			var bmptemp = _('bmptemp');
+			bmptemp.visible = false;
+			var bitmapFont = new Rogue.BitmapFont("./fonts/terminal16.png", 16, 16, 16, 16, bmptemp);
+			// while(!bitmapFont.OK)
+			// 	bitmapFont = new Rogue.BitmapFont("./fonts/terminal16.png", 16, 16, 16, 16, bmptemp);
+			screen.bitmapFont = bitmapFont;
 			screen.initBuffers();
-			Rogue.ScreenUtils.drawRect(0, 0, width-1, height-1, screen, Rogue.ScreenUtils.BLOCK_BOX, "#660000");
-			var box1 = Rogue.ScreenUtils.drawRect(0, 0, 25, 20, screen, Rogue.ScreenUtils.BLOCK_BOX, "#660000");
-			Rogue.ScreenUtils.fillRect(box1.x1 + 1, box1.y1 + 1, box1.x2 - 1, box1.y2 - 1, screen, "▚", "#6b8e23");
-			screen.setDefault();			
+			screen.clear();
+			Rogue.ScreenUtils.drawRect(0, 0, width-1, height-1, screen, Rogue.ScreenUtils.DOUBLE_LINE_BOX, "#660000");
+			var box1 = Rogue.ScreenUtils.drawRect(0, 0, 25, 20, screen, Rogue.ScreenUtils.DOUBLE_LINE_BOX, "#660000");
+			Rogue.ScreenUtils.fillRect(box1.x1 + 1, box1.y1 + 1, box1.x2 - 1, box1.y2 - 1, screen, '░', "#6b8e23");
+			screen.setDefault();
+			screen.resizeCanvasToBitmapFont();
 			var animator = new Rogue.Animator(screen);
 			animator.targetFPS = 5;
 			animator.start(function()
@@ -63,8 +71,9 @@
 					screen.clear();
 					var fpsString = Math.round(animator.FPS(10).toFixed(1)) + " FPS";
 					// console.log(fpsString);
-					Rogue.ScreenUtils.drawString(fpsString, "#FF0000", width - 10, 1, screen);
-					screen.draw();
+					Rogue.ScreenUtils.drawString(fpsString, "#FF0000", box1.x2 + 1, 1, screen);
+					screen.bitmapDraw(animator);
+					// console.log(bitmapFont.OK);
 				});
 		//	alert(Rogue.game.x);
 		}
@@ -73,6 +82,7 @@
 
 <body>
 	<canvas id='screen0' class='screen' width=800 height=600></canvas>
+	<canvas id='bmptemp' class='screen' width=256 height=256 hidden></canvas>
 </body>
 	
 </html>
