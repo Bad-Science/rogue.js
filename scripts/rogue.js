@@ -4,12 +4,14 @@ Object.prototype.subclass = function(parent)
 	if (parent.constructor == Function)
 	{
 		this.prototype = new parent();
+		this.prototype.superConstructor = this.prototype.constructor;
 		this.prototype.constructor = this;
 		this.prototype.parent = parent.prototype;
 	}
 	else
 	{
 		this.prototype = parent;
+		this.prototype.superConstructor = this.prototype.constructor;
 		this.prototype.constructor = this;
 		this.prototype.parent = parent;
 	}
@@ -73,9 +75,9 @@ var Rogue =
 			{
 				for (var y = 0; y < _height; y++)
 				{
-					self.charBuffer[x][y] = "";
+					self.charBuffer[x][y] = " ";
 					self.colorBuffer[x][y] = "#336600";
-					defaultCharBuffer[x][y] = "";
+					defaultCharBuffer[x][y] = " ";
 					defaultColorBuffer[x][y] = "#336600";
 				}
 			}

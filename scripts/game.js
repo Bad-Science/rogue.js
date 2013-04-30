@@ -30,14 +30,10 @@ Rogue.game =
 	Entity: function()
 	{
 		var self = this;
-		var _x, _y;
-		var _vis = {ch: "", co: ""};
-
-		this.comps = {};
 		this.customLogic = null;
 		this.logic = function()
 		{
-			for (var comp in self.comps)
+			for (var comp in self)
 			{
 				if (comp.logic)
 					comp.logic();
@@ -45,47 +41,21 @@ Rogue.game =
 					self.customLogic();
 			}
 		};
-
-		this.x = function(n)
-		{
-			if (n != undefined)
-			{
-				_x = n;
-			}
-			return _x;
-		};
-		this.y = function(n)
-		{
-			if (n != undefined)
-			{
-				_y = n;
-			}
-			return _y;
-		};
+		this.x = 0;
+		this.y = 0;
 	},
 };
 
-Rogue.game.Entity.prototype.subclass = function(parent)
-{
-	parent = (parent || Rogue.game.Entity)
-	this.prototype = new parent();
-	var self = this;
-	var parentConst = this.prototype.constructor;
-	this.prototype.constructor = function()
-	{
-		parentConst();
-		self();
-	};
-	this.prototype.parent = parent.prototype;
-}
-
-Rogue.game.EntityComponents =
-{
-	Vis: function(ch, co)
-	{
-		this.ch = ch;
-		this.co = co;
-	}
-
-	
-};
+// Rogue.game.Entity.prototype.subclass = function(parent)
+// {
+// 	this.prototype = new parent();
+// 	var self = this;
+// 	var parentConst = this.prototype.constructor;
+// 	this.prototype.constructor = function()
+// 	{
+// 		parentConst();
+// 		self();
+// 	};
+// 	this.prototype.parent = parent.prototype;
+// 	this.prototype.superConstructor = parentConst;
+// }

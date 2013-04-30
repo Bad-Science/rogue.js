@@ -1,4 +1,4 @@
-Rogue.Camera = function(s, g)
+Rogue.Camera = function(g, s, x, y, w, h)
 {
 	var self = this;
 	var screen = s;
@@ -13,12 +13,16 @@ Rogue.Camera = function(s, g)
 		return {x: xs, y: ys};
 	};
 
-	this.bounds = function()
+	this.bounds = 
 	{
-		return
+		x1: self.x - Math.floor(w / 2),
+		y1: self.y - Math.floor(h / 2),
+		x2: self.x - Math.round(w / 2),
+		y2: self.y - Math.round(h / 2),
+		contains: function(sx, sy)
 		{
-			x1: self.x() - (scree.width() / 2),
-		}
+			return (this.sx >= x1 && this.sx <= x2 && this.sy >= y1 && this.sy <= y2);
+		},
 	};
 
 	this.drawEntites = function()
@@ -26,10 +30,13 @@ Rogue.Camera = function(s, g)
 		for (var ientity in Rogue.game.entities)
 		{
 			var entity = Rogue.game.entities[ientity];
-			var sp = self.worldToScreen(entity.x, entity.y);
-			var vis = entity.vis();
-			screen.charBuffer[sp.x][sp.y] = vis.ch;
-			screen.colorBuffer[sp.x][sp.y] = vis.co;
+			if (entity.vis && entity.vis.show && self.bounds.contains(entity.x, entity.y))
+			{
+				var sp = self.worldToScreen(entity.x, entity.y);
+				var vis = entity.vis;
+				screen.charBuffer[sp.x][sp.y] = vis.ch;
+				screen.colorBuffer[sp.x][sp.y] = vis.co;
+			}
 		}
 	};
 
@@ -40,7 +47,8 @@ Rogue.Camera = function(s, g)
 		{
 			for (var y = 0; y < map.height; y++)
 			{
-				screen.charBuffer
+				var sx = 
+				screen.charBuffer[]
 			}
 		}
 	};

@@ -48,10 +48,18 @@
 	"buffers":
 	[
 		{
-			"file": "screentest.html",
+			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 2219,
+				"buffer_size": 2490,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/entities.js",
+			"settings":
+			{
+				"buffer_size": 214,
 				"line_ending": "Unix"
 			}
 		},
@@ -59,7 +67,7 @@
 			"file": "scripts/game.js",
 			"settings":
 			{
-				"buffer_size": 779,
+				"buffer_size": 959,
 				"line_ending": "Unix"
 			}
 		}
@@ -96,12 +104,13 @@
 	},
 	"file_history":
 	[
+		"/home/richie/.mozilla/firefox/0xiat55l.richie/chrome/userChrome.css",
+		"/home/richie/Dropbox/Dev/rogue.js/screentest.html",
 		"/home/richie/Dropbox/Dev/rogue.js/scripts/entities.js",
 		"/home/richie/Dropbox/Dev/rogue.js/scripts/camera.js",
 		"/home/richie/Dropbox/Dev/rogue.js/scripts/screenutils.js",
 		"/home/richie/.bashrc",
 		"/home/richie/Dropbox/Dev/rogue.js/scripts/screen.js",
-		"/home/richie/Dropbox/Dev/rogue.js/screentest.html",
 		"/home/richie/Dropbox/Dev/rogue.js/scripts/game.js",
 		"/home/richie/Dropbox/Dev/rogue.js/scripts/rogue.js",
 		"/home/richie/.config/sublime-text-2/Packages/User/Double For.sublime-snippet",
@@ -152,18 +161,18 @@
 			[
 				{
 					"buffer": 0,
-					"file": "screentest.html",
+					"file": "index.html",
 					"settings":
 					{
-						"buffer_size": 2219,
+						"buffer_size": 2490,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								382,
-								382
+								77,
+								107
 							]
 						],
 						"settings":
@@ -172,7 +181,34 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 36.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "scripts/entities.js",
+					"settings":
+					{
+						"buffer_size": 214,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								158,
+								158
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -184,19 +220,19 @@
 			"sheets":
 			[
 				{
-					"buffer": 1,
+					"buffer": 2,
 					"file": "scripts/game.js",
 					"settings":
 					{
-						"buffer_size": 779,
+						"buffer_size": 959,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								751,
-								749
+								808,
+								808
 							]
 						],
 						"settings":
@@ -205,7 +241,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 225.0,
+						"translation.y": 288.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
